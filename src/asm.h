@@ -22,7 +22,7 @@ MA 02111, USA.
 
 extern int arch;
 
-int pass;
+extern int pass;
 extern int lineno;
 extern int errors;
 

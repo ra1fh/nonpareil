@@ -24,6 +24,7 @@ MA 02111, USA.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <zlib.h>    /* for Z_USE_BEST_COMPRESSION */
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
