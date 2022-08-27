@@ -1,3 +1,5 @@
+.. image:: https://github.com/ra1fh/nonpareil/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/ra1fh/nonpareil/actions/workflows/build.yml
 
 nonpareil
 =========
@@ -40,8 +42,8 @@ Debian/Ubuntu:
 
 ::
 
-    apt install cmake flex bison libxml2-dev libpng-dev \
-        libsdl1.2-dev libgtk2.0-dev
+    apt install cmake flex libfl-dev bison libxml2-dev \
+        libpng-dev libsdl1.2-dev libgtk2.0-dev
 
 Fedora
 

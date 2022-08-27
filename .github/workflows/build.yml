@@ -1,0 +1,29 @@
+name: "Build"
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04, ubuntu-22.04 ]
+        compiler: [ clang, gcc ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt install cmake flex libfl-dev bison libxml2-dev libpng-dev libsdl1.2-dev libgtk2.0-dev
+
+      - name: CMake
+        env:
+          CC: ${{ matrix.compiler }}
+          CXX: ${{ matrix.compiler }}
+        run: cmake .
+
+      - name: Build
+        run: make VERBOSE=1
