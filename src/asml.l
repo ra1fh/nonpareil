@@ -43,7 +43,7 @@ static keyword_t asm_keywords [] =
 #define YY_INPUT(buf,result,max_size) \
   { \
     int r = strlen (lineptr); \
-    if (r > max_size) \
+    if ((yy_size_t) r > max_size) \
       r = max_size; \
     memcpy (buf, lineptr, r); \
     lineptr += r; \

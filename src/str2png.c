@@ -358,7 +358,7 @@ static void init_segments (void)
 
 void draw_char (int x, int y, char c)
 {
-  unsigned char m;
+  unsigned char m = 0;
   int i;
   segment_bitmap_t segments;
 
@@ -403,7 +403,7 @@ int main (int argc, char *argv[])
 
   char *kml_fn;
   char *image_fn;
-  int i;
+  unsigned int i;
 
   progname = newstr (argv [0]);
 

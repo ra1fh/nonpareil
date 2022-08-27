@@ -130,7 +130,7 @@ void free_kml (kml_t *kml)
     free (kml->display_color [i]);
 
   for (i = 0; i < KML_MAX_SEGMENT; i++)
-    free (kml->segment [KML_MAX_SEGMENT]);
+    free (kml->segment [i]);
 
   for (i = 0; i < KML_MAX_ANNUNCIATOR; i++)
     free (kml->annunciator [i]);
