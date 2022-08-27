@@ -51,6 +51,6 @@ add_subdirectory(kml)
 add_subdirectory(rom)
 add_subdirectory(src)
 
-install(FILES COPYING CREDITS DEBUGGING INSTALL README TODO
+install(FILES COPYING CREDITS DEBUGGING README TODO
   DESTINATION ${CMAKE_INSTALL_DOCDIR}
 )
