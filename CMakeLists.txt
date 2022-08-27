@@ -1,5 +1,10 @@
 
 cmake_minimum_required(VERSION 3.11)
+
+if ((${CMAKE_VERSION} VERSION_EQUAL "3.24") OR (${CMAKE_VERSION} VERSION_GREATER "3.24"))
+  cmake_policy(SET CMP0135 NEW)
+endif()
+
 project(nonpareil VERSION 0.79 LANGUAGES C)
 
 include(GNUInstallDirs)
