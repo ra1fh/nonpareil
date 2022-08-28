@@ -296,7 +296,7 @@ static void reset (sim_t *sim, bool obdurate)
 }
 
 
-static char reset_message [] =
+static const char reset_message [] =
   "Resetting the calculator may erase any data and programs you have "
   "entered.  Are you sure you want to reset the calculator?";
 
