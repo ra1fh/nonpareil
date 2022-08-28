@@ -354,7 +354,7 @@ static void helios_eol (sim_t *sim, bool right_justify)
 {
   nut_reg_t *nut_reg = get_chip_data (sim->first_chip);
   helios_reg_t *helios = get_chip_data (nut_reg->helios_chip);
-  int old_mode, mode;
+  int mode;
   int buf_idx;  // index into printer buffer
   int col_idx;  // index into graphic line buffer
   printer_line_data_t *line;  // graphic line buffer
@@ -364,7 +364,6 @@ static void helios_eol (sim_t *sim, bool right_justify)
   col_idx = 0;
 
   // get saved mode from start of buffer
-  old_mode = 0;
   mode = helios->mode;
 
   buf_idx = 0;
@@ -407,7 +406,6 @@ static void helios_eol (sim_t *sim, bool right_justify)
       else
 	{
 	  // mode change
-	  old_mode = mode;
 	  mode = byte & 7;
 	  buf_idx++;
 	}

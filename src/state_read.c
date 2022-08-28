@@ -195,7 +195,6 @@ static void parse_reg (sax_data_t *sdata, char **attrs)
 {
   int i;
   bool got_name = false;
-  bool got_index = false;
   bool got_data = false;
   char *name;
   uint64_t index = 0;
@@ -212,7 +211,7 @@ static void parse_reg (sax_data_t *sdata, char **attrs)
       else if (strcmp (attrs [i], "index") == 0)
 	{
 	  index = str_to_uint64 (attrs [i + 1], NULL, 16);
-	  got_index = true;
+	  /* got_index = true; */
 	}
       else if (strcmp (attrs [i], "data") == 0)
 	{

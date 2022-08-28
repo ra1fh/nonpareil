@@ -533,8 +533,10 @@ static void gui_printer_edit_copy_callback (gpointer callback_data,
 					    guint    callback_action,
 					    GtkWidget *widget)
 {
+#if UNUSED
   gui_printer_t *p = callback_data;
   // $$$ not yet implemented
+#endif
 }
 
 

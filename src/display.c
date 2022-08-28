@@ -56,6 +56,7 @@ static void draw_annunciator (gui_display_t *d,
   kml = d->csim->kml;
 
   bg_gc = d->drawing_area->style->bg_gc [GTK_WIDGET_STATE (widget)];
+  (void) bg_gc;
 
   // first clear annunciator rect to bg color
   gdk_draw_rectangle (widget->window,
@@ -169,7 +170,7 @@ static gboolean display_expose_event_callback (GtkWidget *widget,
   GdkGC *bg_gc;
 
   bg_gc = d->drawing_area->style->bg_gc [GTK_WIDGET_STATE (widget)];
-
+  (void) bg_gc;
 
   rect.x = kml->digit_offset.x;
   rect.y = kml->digit_offset.y;

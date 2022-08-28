@@ -87,10 +87,10 @@ static char *ps_bit_name [13] =
 };
 #endif
 
-
+#if UNUSED
 static const reg_t TIME_MODULE_ALMB_WARMSTART_CONSTANT =
 { 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 0 };
-
+#endif
 
 typedef struct
 {

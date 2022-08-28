@@ -250,13 +250,12 @@ static char *nut_field_mnem [8] =
 
 static int nut_disassemble_arith (int op1, char *buf, int len)
 {
-  int l;
   int op = op1 >> 5;
   int field = (op1 >> 2) & 7;
 
-  l = snprintf (buf, len, "%-8s%s",
-		nut_arith_mnem [op],
-		nut_field_mnem [field]);
+  snprintf (buf, len, "%-8s%s",
+	    nut_arith_mnem [op],
+	    nut_field_mnem [field]);
   return (1);
 }
 
