@@ -327,12 +327,15 @@ void output_fat (FILE *outfile,
 		 uint16_t *ROM)
 {
   uint16_t entry_num = 0;
-  uint16_t page_start, addr, jmp_addr;
+  uint16_t addr, jmp_addr;
 
+#if UNUSED
+  uint16_t page_start;
   if (page->Page <= 0xf)
     page_start = page->Page * 0x1000;
   else
     page_start = 0x8000;
+#endif
 
   fprintf (outfile, "XROM  Addr Function    Type\n");
   addr = 2;
