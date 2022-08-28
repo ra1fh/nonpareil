@@ -1768,7 +1768,7 @@ static void nut_clear_memory (sim_t *sim)
 
   for (addr = 0; addr < sim->max_ram; addr++)
     if (nut_reg->ram_exists [addr])
-      reg_zero (& nut_reg->ram [addr], 0, WSIZE - 1);
+	  reg_zero (& nut_reg->ram[addr][0], 0, WSIZE - 1);
 }
 
 
