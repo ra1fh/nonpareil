@@ -591,8 +591,6 @@ int main (int argc, char *argv[])
 
   progname = newstr (argv [0]);
 
-  g_thread_init (NULL);
-
   gtk_init (& argc, & argv);
 
   init_sound ();

@@ -169,11 +169,8 @@ struct sim_thread_vars_t
 
   GAsyncQueueSource *gui_cmd_q_source;
 
-  GTimeVal last_run_time;
-  GTimeVal next_run_time;
-
-  GTimeVal tv;
-  GTimeVal prev_tv;
+  gint64 last_run_time;
+  gint64 next_run_time;
 };
 
 
@@ -618,8 +615,8 @@ static void handle_sim_cmd (sim_t *sim, sim_msg_t *msg)
       break;
     case CMD_SET_IO_PAUSE_FLAG:
       sim->io_pause_flag = msg->b;
-      g_get_current_time (& sim->thread_vars->last_run_time);
-      g_get_current_time (& sim->thread_vars->next_run_time);
+      sim->thread_vars->last_run_time = g_get_monotonic_time();
+      sim->thread_vars->next_run_time = g_get_monotonic_time();
       msg->reply = OK;
       break;
     case CMD_GET_IO_PAUSE_FLAG:
@@ -657,8 +654,8 @@ static void handle_sim_cmd (sim_t *sim, sim_msg_t *msg)
       break;
     case CMD_SET_RUN_FLAG:
       sim->run_flag = msg->b;
-      g_get_current_time (& sim->thread_vars->last_run_time);
-      g_get_current_time (& sim->thread_vars->next_run_time);
+      sim->thread_vars->last_run_time = g_get_monotonic_time();
+      sim->thread_vars->next_run_time = g_get_monotonic_time();;
       msg->reply = OK;
       break;
     case CMD_GET_RUN_FLAG:
@@ -716,27 +713,21 @@ static void handle_sim_cmd (sim_t *sim, sim_msg_t *msg)
 
 void sim_run (sim_t *sim)
 {
-  GTimeVal now;
+  gint64 now;
   int inst_count;
-  long usec;
+  gint64 usec;
 
-  g_get_current_time (& now);
+  now = g_get_monotonic_time ();
 
   /* compute how many microinstructions we want to execute */
-  usec = now.tv_usec - sim->thread_vars->last_run_time.tv_usec;
-  switch (now.tv_sec - sim->thread_vars->last_run_time.tv_sec)
-    {
-    case 0: break;
-    case 1: usec += 1000000; break;
-    default: usec = 1000000;
-    }
+  usec = now - sim->thread_vars->last_run_time;
+  if (usec > 1000000)
+    usec = 1000000;
   inst_count = usec * sim->words_per_usec;
   if (inst_count > MAX_INST_BURST)
     inst_count = MAX_INST_BURST;
 #if 0
-  printf ("tv %d.%06d, usec %d, inst_count %d\n",
-	  sim->thread_vars->tv.tv_sec,
-	  sim->thread_vars->tv.tv_usec,
+  printf ("usec %" G_GINT64_FORMAT ", inst_count %d\n",
 	  usec,
 	  inst_count);
 #endif
@@ -749,10 +740,8 @@ void sim_run (sim_t *sim)
     }
 
   // Remember when we ran, and figure out when to run next.
-  memcpy (& sim->thread_vars->last_run_time, & now, sizeof (GTimeVal));
-
-  memcpy (& sim->thread_vars->next_run_time, & now, sizeof (GTimeVal));
-  g_time_val_add (& sim->thread_vars->next_run_time, JIFFY_USEC);
+  sim->thread_vars->last_run_time = now;
+  sim->thread_vars->next_run_time = now + JIFFY_USEC;
 }
 
 
@@ -760,12 +749,19 @@ gpointer sim_thread_func (gpointer data)
 {
   sim_t *sim = (sim_t *) data;
   sim_msg_t *msg;
+  guint64 timeout;
+  gint64 now;
 
   while (! sim->quit_flag)
     {
-      if ((! sim->io_pause_flag) && sim->run_flag)
-	msg = g_async_queue_timed_pop (sim->thread_vars->cmd_q,
-				       & sim->thread_vars->next_run_time);
+      if ((! sim->io_pause_flag) && sim->run_flag) {
+	now = g_get_monotonic_time();
+	if (sim->thread_vars->next_run_time <= now)
+	  timeout = 0;
+	else
+	  timeout = sim->thread_vars->next_run_time - now;
+	msg = g_async_queue_timeout_pop (sim->thread_vars->cmd_q, timeout);
+      }
       else
 	msg = g_async_queue_pop (sim->thread_vars->cmd_q);
 
@@ -892,7 +888,7 @@ sim_t *sim_init  (void *ref,  // passed to callbacks
 
   sim->cycle_count = 0;
 
-  sim->thread_vars->gthread = g_thread_create (sim_thread_func, sim, TRUE, NULL);
+  sim->thread_vars->gthread = g_thread_new ("sim", sim_thread_func, sim);
 
   return (sim);
 }

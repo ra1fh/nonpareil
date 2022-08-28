@@ -397,7 +397,7 @@ static dbg_cli_t *init_debugger_cli (sim_t *sim)
 
   gtk_container_add (GTK_CONTAINER (dbg->window), vte);
 
-  dbg->thread = g_thread_create (debugger_thread_func, dbg, TRUE, NULL);
+  dbg->thread = g_thread_new ("debugger", debugger_thread_func, dbg);
 
   return (dbg);
 }
