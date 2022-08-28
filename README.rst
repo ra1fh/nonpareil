@@ -1,12 +1,12 @@
 .. image:: https://github.com/ra1fh/nonpareil/actions/workflows/build.yml/badge.svg
     :target: https://github.com/ra1fh/nonpareil/actions/workflows/build.yml
 
-nonpareil
-=========
+Nonpareil Simulator for Electronic Calculators
+==============================================
 
-.. image:: doc/hp35.png
-   :width: 150
-   :align: right
+.. image:: doc/screenshot.png
+   :width: 350
+   :align: center
 
 Nonpareil is a microcode-level simulator for electronic calculators
 written by Eric Smith and published at
@@ -43,16 +43,21 @@ Debian/Ubuntu:
 
 ::
 
-    apt install cmake flex libfl-dev bison libxml2-dev \
+   apt install cmake flex libfl-dev bison libxml2-dev \
         libpng-dev libsdl1.2-dev libgtk2.0-dev
 
 Fedora
 
 ::
 
-    dnf install cmake flex libfl-devel bison libxml2-devel \
+   dnf install cmake flex libfl-devel bison libxml2-devel \
         libpng-devel sdl12-compat-devel gtk2-devel
 
+OpenBSD
+
+::
+
+   pkg_add cmake bison libxml png sdl gtk+2
 
 Compilation:
 
