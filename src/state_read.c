@@ -289,21 +289,21 @@ static void sax_start_element (void *ref,
 {
   sax_data_t *sdata = ref;
 
-  if (strcmp (name, "state") == 0)
+  if (strcmp ((char*) name, "state") == 0)
     parse_state (sdata, (char **) attrs);
-  else if (strcmp (name, "ui") == 0)
+  else if (strcmp ((char*) name, "ui") == 0)
     parse_ui (sdata, (char **) attrs);
-  else if (strcmp (name, "switch") == 0)
+  else if (strcmp ((char*) name, "switch") == 0)
     parse_switch (sdata, (char **) attrs);
-  else if (strcmp (name, "chip") == 0)
+  else if (strcmp ((char*) name, "chip") == 0)
     parse_chip (sdata, (char **) attrs);
-  else if (strcmp (name, "registers") == 0)
+  else if (strcmp ((char*) name, "registers") == 0)
     parse_registers (sdata, (char **) attrs);
-  else if (strcmp (name, "reg") == 0)
+  else if (strcmp ((char*) name, "reg") == 0)
     parse_reg (sdata, (char **) attrs);
-  else if (strcmp (name, "memory") == 0)
+  else if (strcmp ((char*) name, "memory") == 0)
     parse_memory (sdata, (char **) attrs);
-  else if (strcmp (name, "loc") == 0)
+  else if (strcmp ((char*) name, "loc") == 0)
     parse_loc (sdata, (char **) attrs);
   else
     warning ("unknown element '%s'\n", name);
