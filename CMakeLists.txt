@@ -12,7 +12,7 @@ include(CheckSymbolExists)
 include(FindPkgConfig)
 include(ExternalProject)
 
-find_package(BISON REQUIRED)
+find_package(BISON 3.0 REQUIRED)
 find_package(FLEX REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(PNG REQUIRED)

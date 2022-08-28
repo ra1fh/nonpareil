@@ -31,8 +31,9 @@ Building and Installing
 
 Build Requirements:
 
-* CMake 3
-* flex and bison
+* CMake >= 3.11
+* bison >= 3.0
+* flex
 * libxml2
 * libpng
 * SDL 1.2
