@@ -152,10 +152,6 @@ if (ENABLE_DEBUGGER_CLI)
   endif()
 endif()
 
-target_compile_options(nonpareil PRIVATE -Wall)
-target_compile_options(nonpareil PRIVATE -Werror)
-target_compile_options(nonpareil PRIVATE -Wno-unused-function)
-target_compile_options(nonpareil PRIVATE -Wno-deprecated-declarations)
 target_compile_definitions(nonpareil PRIVATE DEFAULT_PATH=${CMAKE_INSTALL_FULL_DATADIR}/nonpareil)
 target_include_directories(nonpareil PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}

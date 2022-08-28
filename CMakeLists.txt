@@ -32,6 +32,7 @@ set(ENABLE_DEBUGGER_GUI ON  CACHE BOOL "Enable debugger GUI interface")
 set(ENABLE_DEBUGGER_CLI OFF CACHE BOOL "Enable debugger command-line interface")
 set(ENABLE_TCL          OFF CACHE BOOL "Use Tcl as debug command interpreter (only with debugger CLI)")
 set(ENABLE_READLINE     OFF CACHE BOOL "Use Readline library for command editing and history (only with debugger CLI)")
+set(ENABLE_WERROR       OFF CACHE BOOL "Enable -Werror")
 
 ExternalProject_Add(nonpareil_roms
   URL      https://web.archive.org/web/20220328100104/https://nonpareil.brouhaha.com/download/nonpareil-0.79.tar.gz
@@ -43,6 +44,14 @@ ExternalProject_Add(nonpareil_roms
 )
 ExternalProject_Get_Property(nonpareil_roms SOURCE_DIR)
 set(nonpareil_roms_SOURCE_DIR ${SOURCE_DIR})
+
+add_compile_options(-Wall)
+add_compile_options(-Wno-unused-function)
+add_compile_options(-Wno-deprecated-declarations)
+if (ENABLE_WERROR)
+  message("-- Enabling -Werror")
+  add_compile_options(-Werror)
+endif()
 
 add_subdirectory(asm)
 add_subdirectory(doc)

@@ -23,7 +23,7 @@ jobs:
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.compiler }}
-        run: cmake .
+        run: cmake -DENABLE_WERROR=TRUE .
 
       - name: Build
         run: make VERBOSE=1
