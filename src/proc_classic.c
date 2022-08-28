@@ -954,7 +954,7 @@ static int parse_opcode (char *bin, int *opcode)
 	(*opcode) += 0;
       else
 	return (0);
-      *bin++;
+      bin++;
     }
   return (1);
 }
