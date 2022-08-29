@@ -278,13 +278,13 @@ static void update_ram_window (void)
 }
 
 
-static bool debug_window_add_ram (GtkWidget *table, int addr)
+static bool debug_window_add_ram (GtkWidget *table, addr_t addr)
 {
   char addr_str [4];
 
   ram_addr [max_ram] = addr;
 
-  sprintf (addr_str, "%03x", addr);
+  sprintf (addr_str, "%03x", addr % 0x1000);
 
   gtk_table_attach_defaults (GTK_TABLE (table),
 			     gtk_label_new (addr_str),
@@ -323,7 +323,7 @@ void debug_show_ram  (gpointer callback_data,
 {
   GtkWidget *table;
   GtkWidget *scrolled_window;
-  int addr = 0;
+  addr_t addr = 0;
   int limit;
   uint64_t val;
   
