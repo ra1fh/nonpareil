@@ -257,7 +257,7 @@ void get_rom_id (uint16_t *ROM,
 		 char *ID)           // output: provide char[9]
 {
   char *ptr = ID;
-  char punct;
+  char punct = 0;
   int i;
 
   for (i = 0x0ffe; i >= 0x0ffb; i--)
