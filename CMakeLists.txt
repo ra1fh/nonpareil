@@ -28,6 +28,8 @@ if(HAVE_STRLCPY)
     add_compile_definitions(HAVE_STRLCPY)
 endif()
 
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
 set(ENABLE_DEBUGGER_GUI ON  CACHE BOOL "Enable debugger GUI interface")
 set(ENABLE_DEBUGGER_CLI OFF CACHE BOOL "Enable debugger command-line interface")
 set(ENABLE_TCL          OFF CACHE BOOL "Use Tcl as debug command interpreter (only with debugger CLI)")
