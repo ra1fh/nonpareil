@@ -1810,7 +1810,7 @@ static bool nut_write_ram (sim_t *sim, int addr, uint64_t *val)
   data = *val;
 
   // now unpack data into nut_reg->ram [addr]
-  for (i = 0; i <= WSIZE; i++)
+  for (i = 0; i < WSIZE; i++)
     {
       nut_reg->ram [addr] [i] = data & 0x0f;
       data >>= 4;
