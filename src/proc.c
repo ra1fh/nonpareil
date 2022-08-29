@@ -395,7 +395,8 @@ bool sim_read_listing_file (sim_t *sim, char *fn)
       if (sim->proc->parse_listing_line (buf, & bank, & addr, & opcode))
 	{
 	  i = bank * sim->proc->max_rom + addr;
-	  if (sim_read_rom (sim, bank, addr, & obj_opcode))
+	  sim->source [i] = newstr (& buf [0]);
+	  if (! sim_read_rom (sim, bank, addr, & obj_opcode))
 	    {
 	      fprintf (stderr, "listing line for which there was no code in object file, bank %d address %o\n",
 		       bank, addr);
@@ -408,7 +409,6 @@ bool sim_read_listing_file (sim_t *sim, char *fn)
 	      fprintf (stderr, "src: %s\n", sim->source [i]);
 	      fprintf (stderr, "object file: %04o\n", obj_opcode);
 	    }
-	  sim->source   [i] = newstr (& buf [0]);
 	  count++;
 	}
     }
