@@ -53,14 +53,16 @@ void sound_callback (void *unused, uint8_t *stream, int len)
 
   for (i = 0; i < MAX_SOUNDS; i++)
     {
-      count = sounds [i].len - sounds [i].pos;
-      if (count > len)
-	count = len;
-      SDL_MixAudio (stream,
-		    & sounds [i].data [sounds [i].pos],
-		    count,
-		    SDL_MIX_MAXVOLUME);
-      sounds [i].pos += count;
+      if (sounds[i].data && sounds[i].len > sounds[i].pos) {
+	count = sounds [i].len - sounds [i].pos;
+	if (count > len)
+	  count = len;
+	SDL_MixAudio (stream,
+		      & sounds [i].data [sounds [i].pos],
+		      count,
+		      SDL_MIX_MAXVOLUME);
+	sounds [i].pos += count;
+      }
     }
 }
 
