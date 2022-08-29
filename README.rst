@@ -14,9 +14,9 @@ written by Eric Smith and published at
 
 This repository contains some modifications compared to nonpareil-0.79:
 
-* The build system has been replaced with CMake3
-* The ROMs are not included and will instead be downloaded during the build
-* Some compilation fixes to compile with with modern compilers
+* The build system has been replaced with CMake 3
+* Some correctness and compilation fixes
+* ROMs will be downloaded during the build.
 
 Currently it is able to simulate some of the HP calculators introduced
 between 1972 and 1982:
@@ -79,7 +79,7 @@ Usage
 
 * Start nonpareil and select a calculator model by loading a KML file
 * Use one of the alias commands that preselect a KML file: 21,
-  25, 32e, 33c, 34c, 35, 37e, 38c, 38e, 41cv, 41cx, 45, 55
+  25, 32e, 33c, 34c, 35, 37e, 38c, 38e, 41cv, 41cx, 45, 55, 80
 
 
 ::
