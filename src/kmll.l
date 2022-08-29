@@ -62,7 +62,8 @@ alpha		[a-zA-Z]
 
 [ \t\n]+	;		/* whitespace */
 
-\n.*		{ strncpy (kml_linebuf, yytext + 1, sizeof (kml_linebuf));
+\n.*		{ strncpy (kml_linebuf, yytext + 1, sizeof (kml_linebuf) - 1);
+		  kml_linebuf[sizeof(kml_linebuf) - 1] = '\0';
 		  kml_lineno++;
 		  yyless (1);  /* give back all but the \n to rescan */
 		}
