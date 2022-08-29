@@ -136,7 +136,7 @@ void realloc_strcpy (char **dest, char *src)
 // strlcpy() will always leave dest NULL-terminated on return.
 char *strlcpy (char *dest, const char *src, size_t l)
 {
-  strncpy (dest, src, l);
+  strncpy (dest, src, l - 1);
   dest [l - 1] = '\0';
   return dest;
 }
