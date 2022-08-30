@@ -68,6 +68,7 @@ static reg_detail_t classic_cpu_reg_detail [] =
 
   CR  ("group",  group,  1,     2,   NULL,      NULL,      0),
   CR  ("rom",    rom,    3,     8,   NULL,      NULL,      0),
+  CR  ("del_rom",del_rom,3,     8,   NULL,      NULL,      0),
   CR  ("pc",     pc,     8,     8,   NULL,      NULL,      0),
   CR  ("ret_pc", ret_pc, 8,     8,   NULL,      NULL,      0),
   //    prev_pc
