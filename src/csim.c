@@ -86,6 +86,8 @@ void usage (FILE *f)
   fprintf (f, "   --kmldebug\n");
   fprintf (f, "   --kmldump\n");
   fprintf (f, "   --scancodedebug\n");
+  fprintf (f, "   --nostate\n");
+  fprintf (f, "   --trace\n");
 #ifdef HAS_DEBUGGER
   fprintf (f, "   --stop\n");
 #endif
@@ -576,6 +578,8 @@ int main (int argc, char *argv[])
   csim = alloc (sizeof (csim_t));
 
   gboolean shape = SHAPE_DEFAULT;
+  gboolean trace = FALSE;
+  gboolean nostate = FALSE;
   gboolean kml_dump = FALSE;
   gboolean run = TRUE;
 
@@ -608,6 +612,10 @@ int main (int argc, char *argv[])
 	    kml_dump = 1;
 	  else if (strcasecmp (argv [0], "--scancodedebug") == 0)
 	    csim->scancode_debug = 1;
+	  else if (strcasecmp (argv [0], "--nostate") == 0)
+	      nostate = true;
+	  else if (strcasecmp (argv [0], "--trace") == 0)
+	      trace = true;
 #ifdef HAS_DEBUGGER
 	  else if (strcasecmp (argv [0], "--stop") == 0)
 	    run = FALSE;
@@ -813,8 +821,12 @@ int main (int argc, char *argv[])
 
   set_default_state_path (csim);
 
-  if ((csim->state_fn [0]) && file_exists (csim->state_fn))
-    state_read_xml (csim->sim, csim->state_fn);
+  if (! nostate)
+    if ((csim->state_fn [0]) && file_exists (csim->state_fn))
+      state_read_xml (csim->sim, csim->state_fn);
+
+  if (trace)
+    sim_set_debug_flag(csim->sim, SIM_DEBUG_TRACE, 1);
 
   if (run)
     sim_start (csim->sim);
